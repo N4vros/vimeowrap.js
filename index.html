@@ -14,21 +14,19 @@
 	<div id="player"></div>
 	<script>
 		vimeowrap('player').setup({
-			//item: 1,
 			repeat: "list",
 			urls: [
 				{ url: 'https://vimeo.com/39050404', title: 'My title translation' },
 				'https://vimeo.com/152422354',
-				'https://vimeo.com/149776173'
+				{ url: 'https://vimeo.com/149776173', title: 'Video 3' }
 			],
-			width: 800,
-			height: 400,
 			byline: false,
 			portrait: false,
 			title: false,
 			plugins: {
 				playlist: {
 					description: false,
+					titleMaxLength: 0,
 					byline: false
 				}
 			}
