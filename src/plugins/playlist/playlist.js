@@ -24,24 +24,30 @@ vimeowrap.playlist = function(api, config) {
 		thumb: {
 			width: 80,
 			height: 60
-		}
+		},
+		title: true,
+		titleMaxLength: 30,
+		byline: true,
+		description: true,
+		descriptionMaxLength: 50,
+		duration: true
 	};
-
-	options.template =
-		'<a href="{{url}}" title="{{title}}">' +
-			'<span class="shade"></span>' +
-			'<span class="border"></span>' +
-			'<img src="{{thumbnail_' + (config.thumb && config.thumb.quality ? config.thumb.quality : "small") + '}}" alt="" />' +
-			'<span class="title">{{title|truncate:30}}</span>' +
-			'<span class="byline">from <b>{{user_name}}</b> ' +
-				'<time datetime="{{upload_date}}">{{upload_date|timesince}} ago</time>' +
-			'</span>' +
-			'<span class="desc">{{description|striptags|truncate:50}}</span>' +
-			'<span class="duration">{{duration|time}}</span>' +
-		'</a>';
 
 	config = vimeowrap.utils.extend(options, config);
 	this.config = config;
+
+	options.template =
+		'<a href="{{url}}" title="{{title}}">' +
+									'<span class="shade"></span>' +
+									'<span class="border"></span>' +
+									'<img src="{{thumbnail_' + (config.thumb && config.thumb.quality ? config.thumb.quality : "small") + '}}" alt="" />' +
+			(config.title ?  		'<span class="title">{{title' + (config.titleMaxLength == 0 ? '' : '|truncate:' + config.titleMaxLength) + '}}</span>' : '') +
+			(config.byline ? 		'<span class="byline">from <b>{{user_name}}</b> ' +
+										'<time datetime="{{upload_date}}">{{upload_date|timesince}} ago</time>' +
+							 		'</span>' : '') +
+			(config.description ? 	'<span class="desc">{{description|striptags' + (config.descriptionMaxLength == 0 ? '' : '|truncate:' + config.descriptionMaxLength) + '}}</span>' : '') +
+			(config.duration ? 		'<span class="duration">{{duration|time}}</span>' : '') +
+		'</a>';
 
 	this.setup = function() {
 		

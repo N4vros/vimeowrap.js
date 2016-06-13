@@ -17,16 +17,20 @@
 			//item: 1,
 			repeat: "list",
 			urls: [
-				'https://vimeo.com/17950038',
-				'https://vimeo.com/album/1530284',
-				'https://vimeo.com/album/1530284?page=2'
+				{ url: 'https://vimeo.com/39050404', title: 'My title translation' },
+				'https://vimeo.com/152422354',
+				'https://vimeo.com/149776173'
 			],
+			width: 800,
+			height: 400,
+			byline: false,
 			portrait: false,
 			title: false,
-			byline: false,
-			badge: false,
 			plugins: {
-				carousel: {}
+				playlist: {
+					description: false,
+					byline: false
+				}
 			}
 		});
 	</script>
