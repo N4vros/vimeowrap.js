@@ -1,6 +1,7 @@
 # vimeowrap.js
 
-vimeowrap is an easy to use Vimeo player embedder that can be extended with plugins.
+Vimeowrap is an easy to use Vimeo player embedder that can be extended with plugins.
+This is a fork of https://github.com/luwes/vimeowrap.js
 
 ## Features
 * Uses oEmbed so the embed code is always up to date
