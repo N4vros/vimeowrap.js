@@ -59,6 +59,7 @@ Warning: override doesn't work inside the vimeo video, it's only for the plugins
 		plugins: {
 			playlist: {
 				description: false,
+				titleMaxLength: 0,
 				byline: false
 			}
 		}
