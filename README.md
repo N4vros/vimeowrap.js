@@ -38,10 +38,10 @@ This is a fork of https://github.com/luwes/vimeowrap.js
 	});
 </script>
 ```
-
-### Playlist with no description and no author and overrided title for dynamic translation
-### It's possible to override other vimeo informations like description, user name...
-### Warning: override doesn't work inside the vimeo video, it's only for the plugins
+### Advanced
+##### Playlist with no description and no author and overrided title for dynamic translation
+##### It's possible to override other vimeo informations like description, user name...
+##### Warning: override doesn't work inside the vimeo video, it's only for the plugins
 ``` html
 <div id="player"></div>
 <script src="http://luwes.co/vimeowrap.js/vimeowrap.js"></script>
