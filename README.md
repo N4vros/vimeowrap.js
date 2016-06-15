@@ -42,6 +42,7 @@ This is a fork of https://github.com/luwes/vimeowrap.js
 Playlist with no description, no author, no title limitation (default 30) and overrided title for dynamic translation  
 It's possible to override other vimeo informations like description, user name...  
 Warning: override doesn't work inside the vimeo video, it's only for the plugins  
+It's possible to read private video (with restriction domain or with no restriction) with the attribute "private: true"
 ``` html
 <div id="player"></div>
 <script src="http://luwes.co/vimeowrap.js/vimeowrap.js"></script>
@@ -53,6 +54,7 @@ Warning: override doesn't work inside the vimeo video, it's only for the plugins
 			'https://vimeo.com/152422354',
 			{ url: 'https://vimeo.com/149776173', title: 'Video 3' }
 		],
+		private: true,
 		byline: false,
 		portrait: false,
 		title: false,
