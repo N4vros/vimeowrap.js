@@ -2,6 +2,7 @@
 var playlistloader = function(playerApi) {
 	var _this = this;
 	var index = 0;
+	var private = false;
 	var playlist = [];
 
 	this.load = function(arr) {
@@ -12,12 +13,16 @@ var playlistloader = function(playerApi) {
 	
 	function convert(arr) {
 		for (var i = 0; i < arr.length; i++) {
-			var apiV2 = "vimeo.com/api/v2/";
-			arr[i] = arr[i].replace(/vimeo.com\/(\d+)$/i, apiV2 + 'video/$1.json');
-			arr[i] = arr[i].replace(/vimeo.com\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + '$1/videos.json$2');
-			arr[i] = arr[i].replace(/vimeo.com\/groups\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'group/$1/videos.json$2');
-			arr[i] = arr[i].replace(/vimeo.com\/channels\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'channel/$1/videos.json$2');
-			arr[i] = arr[i].replace(/vimeo.com\/album\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'album/$1/videos.json$2');
+			if (playerApi.config.private) {
+				arr[i] = "https://vimeo.com/api/oembed.json?url=" + arr[i];
+			} else {
+				var apiV2 = "vimeo.com/api/v2/";
+				arr[i] = arr[i].replace(/vimeo.com\/(\d+)$/i, apiV2 + 'video/$1.json');
+				arr[i] = arr[i].replace(/vimeo.com\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + '$1/videos.json$2');
+				arr[i] = arr[i].replace(/vimeo.com\/groups\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'group/$1/videos.json$2');
+				arr[i] = arr[i].replace(/vimeo.com\/channels\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'channel/$1/videos.json$2');
+				arr[i] = arr[i].replace(/vimeo.com\/album\/([A-Z0-9]+)([\?A-Z0-9=]*)$/i, apiV2 + 'album/$1/videos.json$2');
+			}
 		}
 		return arr;
 	}
@@ -27,7 +32,12 @@ var playlistloader = function(playerApi) {
 	}
 	
 	function loaded(json) {
-	
+		if (playerApi.config.private) {
+			json.id = json.video_id;
+			json.thumbnail_small = json.thumbnail_url;
+			json.url = json.provider_url + json.video_id;
+		}
+
 		playlist = playlist.concat(json);
 
 		if (index < _this.list.length) {

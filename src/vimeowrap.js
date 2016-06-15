@@ -63,6 +63,7 @@ vimeowrap.api = function(container) {
 			color: "00adef",
 			repeat: "none",
 			item: 0,
+			private: false,
 			api: true,
 			player_id: utils.uniqueId('player_')
 		};
@@ -143,6 +144,7 @@ vimeowrap.api = function(container) {
 		config.internal.urls = {};
 		config.internal.urls.array = [];
 		config.internal.urls.object = {};
+		playlist = [];
 		for (var i = 0; i < config.urls.length; i++) {
 			if (typeof config.urls[i] === 'object') {
 				config.internal.urls.array.push(config.urls[i]['url']);
