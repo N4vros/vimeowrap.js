@@ -135,6 +135,10 @@ vimeowrap.playlist = function(api, config) {
 		api.events.playlist.add(parse);
 		api.events.playlistItem.add(selectItem);
 	};
+
+	this.redraw = function() {
+		scroller.redraw();
+	};
 	
 	function parse(playlist) {
 		
