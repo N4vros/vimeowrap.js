@@ -148,10 +148,16 @@ vimeowrap.api = function(container) {
 		for (var i = 0; i < config.urls.length; i++) {
 			if (typeof config.urls[i] === 'object') {
 				config.internal.urls.array.push(config.urls[i]['url']);
-				config.internal.urls.object[config.urls[i].url] = config.urls[i];
+				if (typeof config.internal.urls.object[config.urls[i].url] === 'undefined') {
+					config.internal.urls.object[config.urls[i].url] = [];
+				}
+				config.internal.urls.object[config.urls[i].url].push(config.urls[i]);
 			} else {
 				config.internal.urls.array.push(config.urls[i]);
-				config.internal.urls.object[config.urls[i]] = { url: config.urls[i] };
+				if (typeof config.internal.urls.object[config.urls[i].url] === 'undefined') {
+					config.internal.urls.object[config.urls[i].url] = [];
+				}
+				config.internal.urls.object[config.urls[i].url].push({ url: config.urls[i] });
 			}
 		}
 		
@@ -163,9 +169,10 @@ vimeowrap.api = function(container) {
 	};
 
 	function overridePlaylistItems(p) {
+		var urls = JSON.parse(JSON.stringify(config.internal.urls.object));
 		for (var i = 0; i < p.length; i++) {
-			if (typeof config.internal.urls.object[p[i].url] !== 'undefined') {
-				var url = config.internal.urls.object[p[i].url];
+			if (urls[p[i].url] instanceof Array && urls[p[i].url].length > 0) {
+				var url = urls[p[i].url].shift();
 				for (var key in url) {
 					if (key != 'url') {
 						p[i][key] = url[key];
